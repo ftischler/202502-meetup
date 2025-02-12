@@ -2,15 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   signal,
+  viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthStore } from '../shared/auth/auth.store';
+import { Focusable } from '../shared/focuesable';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
+  imports: [FormsModule, Focusable],
   styles: `
     h1 {
       text-align: center;
@@ -90,11 +93,16 @@ import { AuthStore } from '../shared/auth/auth.store';
     <form (submit)="login()">
       <label>
         Email:
-        <input type="email" [(ngModel)]="email" name="email" #emailInput />
+        <input type="email" [(ngModel)]="email" name="email" focusable />
       </label>
       <label>
         Password:
-        <input type="password" [(ngModel)]="password" name="password" />
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          focusable
+        />
       </label>
       @if (authStore.authError()) {
         <div class="error">
@@ -103,7 +111,7 @@ import { AuthStore } from '../shared/auth/auth.store';
       }
       <div class="buttons">
         <button type="submit">Login</button>
-        <button type="reset" (click)="emailInput.focus()">Reset</button>
+        <button type="reset" (click)="focusFirstInput()">Reset</button>
       </div>
     </form>`,
 })
@@ -118,7 +126,17 @@ export default class Login {
     password: this.password(),
   }));
 
+  readonly inputs = viewChildren(Focusable);
+
+  #inputEffect = effect(() => {
+    console.log('Focusable inputs', this.inputs());
+  });
+
   async login() {
     await this.authStore.login(this.credentials());
+  }
+
+  focusFirstInput() {
+    this.inputs()[0].focus();
   }
 }
