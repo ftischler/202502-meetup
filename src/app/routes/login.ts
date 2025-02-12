@@ -104,7 +104,7 @@ import { Focusable } from '../shared/focuesable';
           focusable
         />
       </label>
-      @if (authStore.authError()) {
+      @if (authError()) {
         <div class="error">
           Error: this user does not exist or your password was wrong
         </div>
@@ -127,6 +127,8 @@ export default class Login {
   }));
 
   readonly inputs = viewChildren(Focusable);
+
+  authError = this.authStore.authError;
 
   #inputEffect = effect(() => {
     console.log('Focusable inputs', this.inputs());
