@@ -5,15 +5,7 @@ import { AuthStore } from './shared/auth/auth.store';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./routes/home'),
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./routes/register'),
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./routes/login'),
+    loadComponent: () => import('./routes/search'),
   },
   {
     path: 'logout',
@@ -22,5 +14,13 @@ export const routes: Routes = [
   {
     path: 'pokemon/:name',
     loadComponent: () => import('./routes/pokemon'),
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./routes/register'),
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./routes/login'),
   },
 ];

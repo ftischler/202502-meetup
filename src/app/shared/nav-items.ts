@@ -3,7 +3,7 @@ import { NavItem } from './sidenav';
 export const loggedInNavItems = [
   {
     path: '/',
-    label: 'Home',
+    label: 'Search',
   },
   {
     path: '/logout',
@@ -13,11 +13,11 @@ export const loggedInNavItems = [
 
 export const loggedOutNavItems = [
   {
-    path: '/',
-    label: 'Home',
+    path: '/login',
+    label: 'Login',
   },
   {
-    path: '/logout',
-    label: 'Logout',
+    path: '/register',
+    label: 'Register',
   },
 ] satisfies NavItem[];

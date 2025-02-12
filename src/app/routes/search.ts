@@ -88,7 +88,7 @@ const storageKey = 'pokemon';
     </form>
   </main>`,
 })
-export default class Home {
+export default class Search {
   router = inject(Router);
   localStorage = inject(WA_LOCAL_STORAGE);
 
