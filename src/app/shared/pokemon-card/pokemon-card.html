@@ -1,0 +1,29 @@
+@let cardPokemon = pokemon();
+<div class="card" [class.selected]="selected()">
+  <div class="content">
+    <h2>{{ cardPokemon.name | titlecase }}</h2>
+    <img
+      [ngSrc]="cardPokemon.sprites.front_default"
+      [alt]="cardPokemon.name"
+      height="96"
+      width="96"
+      priority
+    />
+
+    <dl class="details">
+      <dt>Type</dt>
+      <dd>{{ cardPokemon.types | concat: { mapFn: mapType } | titlecase }}</dd>
+      <dt>Pokédex No.</dt>
+      <dd>{{ cardPokemon.id }}</dd>
+      <dt>Height</dt>
+      <dd>{{ cardPokemon.height / 10 | number: "1.0-2" }} m</dd>
+      <dt>Weight</dt>
+      <dd>{{ cardPokemon.weight / 10 | number: "1.0-2" }} kg</dd>
+    </dl>
+  </div>
+  <div class="actions">
+    <button type="button" (click)="toggleSelected()">
+      {{ selected() ? "Deselect" : "Select" }} Pokémon
+    </button>
+  </div>
+</div>
